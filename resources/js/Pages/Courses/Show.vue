@@ -3,13 +3,22 @@
         <template slot="header">
             {{ course.title }}
         </template>
-        <div class="py-3">
-            <div class="text-2xl">{{ course.episodes[0].title }}</div>
-            <iframe class="w-full h-screen" :src="course.episodes[0].video_url" 
+        <div class="py-4 mx-8">
+            <div class="text-2xl">{{ this.courseShow.episodes[this.currentKey].title }}</div>
+            <iframe class="w-full h-screen" :src="this.courseShow.episodes[this.currentKey].video_url" 
             frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
-            picture-in-picture" allowfullscreen></iframe>
-            <div class=" text-sm text-gray-500">{{ course.episodes[0].description }}</div>
-        </div>  
+            picture-in-picture"  allowfullscreen></iframe>
+            <div class=" text-sm text-gray-500">{{ this.courseShow.episodes[this.currentKey].description }}</div>
+
+            <div class="mt-6">
+                <ul v-for="(episode, index) in this.courseShow.episodes" v-bind:key="episode.id">
+                    <li class="mt-3">
+                        Episode n°{{ index + 1}} - {{ episode.title }}</li>
+                        <button class="text-gray-500 focus:text-indigo-500 focus:outline-none"
+                        @click="switchEpisode(index)">Voir l'épisode</button>
+                </ul>
+            </div> 
+        </div>
     </app-layout>
 </template>
 
@@ -26,7 +35,19 @@ export default {
 
     data() {
         return {
-            courseShow: this.course  
+            courseShow: this.course,
+            currentKey: 0
+        }
+    },
+
+    methods: {
+        switchEpisode(index) {
+            this.currentKey = index;
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
         }
     },
 

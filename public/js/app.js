@@ -3488,6 +3488,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3496,8 +3505,19 @@ __webpack_require__.r(__webpack_exports__);
   props: ['course'],
   data: function data() {
     return {
-      courseShow: this.course
+      courseShow: this.course,
+      currentKey: 0
     };
+  },
+  methods: {
+    switchEpisode: function switchEpisode(index) {
+      this.currentKey = index;
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
   },
   mounted: function mounted() {
     /*         console.log(this.courseList);
@@ -26664,15 +26684,15 @@ var render = function() {
         _vm._v("\n        " + _vm._s(_vm.course.title) + "\n    ")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "py-3" }, [
+      _c("div", { staticClass: "py-4 mx-8" }, [
         _c("div", { staticClass: "text-2xl" }, [
-          _vm._v(_vm._s(_vm.course.episodes[0].title))
+          _vm._v(_vm._s(this.courseShow.episodes[this.currentKey].title))
         ]),
         _vm._v(" "),
         _c("iframe", {
           staticClass: "w-full h-screen",
           attrs: {
-            src: _vm.course.episodes[0].video_url,
+            src: this.courseShow.episodes[this.currentKey].video_url,
             frameborder: "0",
             allow:
               "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; \n        picture-in-picture",
@@ -26681,8 +26701,40 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: " text-sm text-gray-500" }, [
-          _vm._v(_vm._s(_vm.course.episodes[0].description))
-        ])
+          _vm._v(_vm._s(this.courseShow.episodes[this.currentKey].description))
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "mt-6" },
+          _vm._l(this.courseShow.episodes, function(episode, index) {
+            return _c("ul", { key: episode.id }, [
+              _c("li", { staticClass: "mt-3" }, [
+                _vm._v(
+                  "\n                    Episode n°" +
+                    _vm._s(index + 1) +
+                    " - " +
+                    _vm._s(episode.title)
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "text-gray-500 focus:text-indigo-500 focus:outline-none",
+                  on: {
+                    click: function($event) {
+                      return _vm.switchEpisode(index)
+                    }
+                  }
+                },
+                [_vm._v("Voir l'épisode")]
+              )
+            ])
+          }),
+          0
+        )
       ])
     ],
     2
