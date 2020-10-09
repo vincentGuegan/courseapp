@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/courses', 'App\Http\Controllers\CourseController@index');
+Route::get('/courses', 'App\Http\Controllers\CourseController@index')->name('courses.index');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');

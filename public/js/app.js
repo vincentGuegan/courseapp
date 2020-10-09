@@ -3045,6 +3045,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3429,10 +3432,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      courseList: this.courses
+    };
+  },
+  props: ['courses'],
+  mounted: function mounted() {
+    console.log(this.courseList);
   }
 });
 
@@ -25159,13 +25183,28 @@ var render = function() {
                     "jet-nav-link",
                     {
                       attrs: {
-                        href: _vm.route("dashboard"),
+                        href: "dashboard",
                         active: _vm.$page.currentRouteName == "dashboard"
                       }
                     },
                     [
                       _vm._v(
                         "\n                            Dashboard\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "jet-nav-link",
+                    {
+                      attrs: {
+                        href: "courses",
+                        active: _vm.$page.currentRouteName == "courses.index"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Les formations\n                        "
                       )
                     ]
                   )
@@ -26507,7 +26546,45 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("app-layout", [_c("h1", [_vm._v("Coucou")])])
+  return _c(
+    "app-layout",
+    [
+      _c("template", { slot: "header" }, [
+        _vm._v("\n        Liste des formations\n    ")
+      ]),
+      _vm._v(" "),
+      _vm._l(this.courseList, function(course) {
+        return _c("div", { key: course.id, staticClass: "py-3" }, [
+          _c("div", { staticClass: "mx-8 bg-white-200 rounded shadow p-4" }, [
+            _c("div", { staticClass: "flex justify-between item-center" }, [
+              _c("div", { staticClass: "text-4xl" }, [
+                _vm._v(_vm._s(course.title))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-sm text-gray-400" }, [
+                _vm._v("25 épisodes")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: " text-sm text-gray-500" }, [
+              _vm._v(_vm._s(course.description))
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass:
+                  "bg-indigo-500 text-white px-2 py-1 text-sm mt-3 rounded hover:bg-indigo-700 inline-block",
+                attrs: { href: "#" }
+              },
+              [_vm._v("Voir la formation")]
+            )
+          ])
+        ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
