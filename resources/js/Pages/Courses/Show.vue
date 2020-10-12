@@ -12,10 +12,14 @@
 
             <div class="mt-6">
                 <ul v-for="(episode, index) in this.courseShow.episodes" v-bind:key="episode.id">
-                    <li class="mt-3">
-                        Episode n°{{ index + 1}} - {{ episode.title }}</li>
-                        <button class="text-gray-500 focus:text-indigo-500 focus:outline-none"
-                        @click="switchEpisode(index)">Voir l'épisode</button>
+                    <div>
+                        <li class="mt-3 flex justify-between items-center">
+                            Episode n°{{ index + 1}} - {{ episode.title }}
+                            <button class="text-gray-500 focus:text-indigo-500 focus:outline-none"
+                            @click="switchEpisode(index)">Voir l'épisode</button>
+                            <progress-button :episode-id="episode.id" :watched-episodes="watched" />
+                        </li>
+                    </div>
                 </ul>
             </div> 
         </div>
@@ -25,13 +29,15 @@
 <script>
 
 import AppLayout from './../../Layouts/AppLayout';
+import ProgressButton from './ProgressButton';
 
 export default {
     components: {
         AppLayout,
+        ProgressButton
     },
 
-    props: ['course'],
+    props: ['course', 'watched'],
 
     data() {
         return {
