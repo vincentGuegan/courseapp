@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 
 class CourseController extends Controller
@@ -36,6 +37,13 @@ class CourseController extends Controller
             'course' => $course,
             'watched' => $watched
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        Course::create($request->all());
+
+        return Redirect::route('dashboard')->with('success', 'Félicitation, la formation a bien été mise en ligne.');
     }
 
     public function toggleProgress(Request $request)
