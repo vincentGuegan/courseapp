@@ -11,7 +11,9 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'description', 'user_id'];
+
+    protected $appends = ['update'];
 
     protected static function booted() {
         static::creating(function ($course) {
@@ -19,7 +21,12 @@ class Course extends Model
         });
     }
 
-     public function episodes()
+    public function getUpdateAttribute()
+    {
+        return $this->can('update-course', $this);
+    }
+
+    public function episodes()
     {
         return $this->hasMany(Episode::class);
     }

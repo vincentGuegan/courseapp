@@ -13,7 +13,10 @@
                     <div class="text-sm text-gray-400">{{ course.episodes_count }} épisodes</div>
                 </div>
                 <div class=" text-sm text-gray-500">{{ course.description }}</div>
-                <a :href="'course/' + course.id" class="bg-indigo-700 text-white px-3 py-2 text-sm mt-3 inline-block rounded hover:bg-indigo-500">Voir la formation</a>
+                <div class="flex items-center justify-between">
+                    <a :href="'course/' + course.id" class="bg-indigo-700 text-white px-3 py-2 text-sm mt-3 inline-block rounded hover:bg-indigo-500">Voir la formation</a>
+                    <a :href="'courses/edit/' + course.id" v-if="course.update" class="bg-gray-700 text-white px-3 py-2 text-sm mt-3 inline-block rounded hover:bg-indigo-500">Modifier la formation</a>
+                </div>
             </div>
         </div>  
     </app-layout>
