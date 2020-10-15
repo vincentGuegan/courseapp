@@ -4,18 +4,22 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Episode;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Gate;
 
 class Course extends Model
 {
     use HasFactory;
+    use Authorizable;
 
     protected $fillable = ['title', 'description', 'user_id'];
 
     protected $appends = ['update'];
 
-    protected static function booted() {
+    protected static function booted()
+    {
         static::creating(function ($course) {
             $course->user_id = auth()->id();
         });

@@ -107,7 +107,7 @@
             add() {
                 this.form.episodes.push({title: null, description: null, video_url: null});
             },
-             remove() {
+            remove() {
                 this.form.episodes.pop();
             }
         }
